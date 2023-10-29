@@ -23,14 +23,16 @@ def post_message(message: str):
             channel = os.environ.get("SLACK_LUNCH_CHANNEL"),
             text = message
         )
-        logger.info(result)
+        print(result)
     except SlackApiError as e:
-        logger.error(f"Error posting message in <!{channel}>: {e}")
+        print(f"Error posting message in <!{channel}>: {e}")
 
 def main():
+    print(f"Current Time @ Start: {datetime.now().strftime('%H:%M')}")
+    print(f"Current target: {os.environ.get('SLACK_SCHEDULED_HOUR')}:{os.environ.get('SLACK_SCHEDULED_MINUTE')} (-{os.environ.get('UTC_OFFSET')}:00 Offset)")
+    
     while (True):
         current_datetime = datetime.now()
-        print(int(current_datetime.strftime("%H")) - int(os.environ.get("UTC_OFFSET")))
         if int(current_datetime.strftime("%H")) - int(os.environ.get("UTC_OFFSET")) == int(os.environ.get("SLACK_SCHEDULED_HOUR")) and current_datetime.minute == int(os.environ.get("SLACK_SCHEDULED_MINUTE")):
             post_message(find_visiting_chefs_fmt())
         time.sleep(60)
