@@ -30,7 +30,7 @@ def post_message(message: str):
 def main():
     while (True):
         current_datetime = datetime.now()
-        print(int(current_datetime.strftime("%H")) - int(os.environ.get("UTC_OFFSET")) == int(os.environ.get("SLACK_SCHEDULED_HOUR")))
+        print(int(current_datetime.strftime("%H")) - int(os.environ.get("UTC_OFFSET")))
         if int(current_datetime.strftime("%H")) - int(os.environ.get("UTC_OFFSET")) == int(os.environ.get("SLACK_SCHEDULED_HOUR")) and current_datetime.minute == int(os.environ.get("SLACK_SCHEDULED_MINUTE")):
             post_message(find_visiting_chefs_fmt())
         time.sleep(60)
