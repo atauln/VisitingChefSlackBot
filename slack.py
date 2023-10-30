@@ -1,8 +1,7 @@
 import os
 import logging
 import time
-import date
-from datetime import datetime
+from datetime import datetime, date
 from slack_sdk import WebClient as SlackWebClient
 from slack_sdk.errors import SlackApiError
 
