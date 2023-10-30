@@ -34,7 +34,7 @@ def main():
     while (True):
         current_datetime = datetime.now()
         if int(current_datetime.strftime("%H")) - int(os.environ.get("UTC_OFFSET")) == int(os.environ.get("SLACK_SCHEDULED_HOUR")) and current_datetime.minute == int(os.environ.get("SLACK_SCHEDULED_MINUTE")):
-            post_message(find_visiting_chefs_fmt())
+            post_message(find_visiting_chefs_fmt(current_datetime))
         time.sleep(60)
 
 if __name__ == "__main__":
