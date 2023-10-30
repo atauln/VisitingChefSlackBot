@@ -39,7 +39,7 @@ def find_visiting_chefs_fmt(tod = date.today()) -> str:
     base_str = "Here are the visiting chefs for today:\n"
     for chef in locations:
         base_str += f"*{chef['name']}* is at _{chef['location']}_.\n"
-        base_str += f">_{chef['description']}_"
+        base_str += f">_{chef['description']}_\n"
     return base_str if len(locations) != 0 else "*There are no visiting chefs today!*"
 
 def main():
