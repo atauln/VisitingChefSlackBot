@@ -37,10 +37,17 @@ def find_visiting_chefs(tod = date.today()) -> list[dict]:
 def find_visiting_chefs_fmt(tod = date.today()) -> str:
     locations = find_visiting_chefs(tod)
     base_str = "Here are the visiting chefs for today:\n"
+    menu_per_location = {}
     for chef in locations:
-        base_str += f"*{chef['name']}* is at _{chef['location']}_.\n"
-        base_str += f">_{chef['description']}_\n"
-    return base_str if len(locations) != 0 else "*There are no visiting chefs today!*"
+        if menu_per_location.get(chef['location']) == None:
+            menu_per_location[chef['location']] = [chef]
+        else:
+            menu_per_location[chef['location']].append(chef)
+    for (location, menus) in menu_per_location.items():
+        base_str += f"*{location}*\n"
+        for menu in sorted(menus, key=lambda x: 'am' not in x['name'].lower()):
+            base_str += f" - {menu['name']}\n"
+    return base_str
 
 def main():
     print(find_visiting_chefs())
