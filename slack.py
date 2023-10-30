@@ -1,6 +1,7 @@
 import os
 import logging
 import time
+import date
 from datetime import datetime
 from slack_sdk import WebClient as SlackWebClient
 from slack_sdk.errors import SlackApiError
@@ -34,7 +35,7 @@ def main():
     while (True):
         current_datetime = datetime.now()
         if int(current_datetime.strftime("%H")) - int(os.environ.get("UTC_OFFSET")) == int(os.environ.get("SLACK_SCHEDULED_HOUR")) and current_datetime.minute == int(os.environ.get("SLACK_SCHEDULED_MINUTE")):
-            post_message(find_visiting_chefs_fmt(current_datetime))
+            post_message(find_visiting_chefs_fmt(tod = date.today()))
         time.sleep(60)
 
 if __name__ == "__main__":
