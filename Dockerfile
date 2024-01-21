@@ -13,4 +13,4 @@ WORKDIR /app/
 
 ENV PYTHONUNBUFFERED True
 
-CMD ["python3", "slack.py"]
+CMD ["python3", "slack_now.py"]

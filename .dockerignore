@@ -1,0 +1,4 @@
+.env.template
+__pycache__/
+venv/
+.gitignore
