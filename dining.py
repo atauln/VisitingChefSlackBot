@@ -2,7 +2,7 @@ from datetime import date
 import requests
 
 def get_all_dining(tod = date.today()):
-    url = f'https://tigercenter.rit.edu/tigerCenterApp/tc/dining-all?date={str(tod)}'
+    url = f'https://tigercenter.rit.edu/tigerCenterApi/tc/dining-all?date={tod.strftime("%Y-%m-%d")}'
     response = requests.get(
         url
     ).json()
