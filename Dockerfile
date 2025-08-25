@@ -1,4 +1,4 @@
-FROM docker.io/python:3.11-buster
+FROM docker.io/python:3.11-slim-bullseye
 LABEL maintainer="Ata Noor [@atom] <>atom@csh.rit.edu"
 
 WORKDIR /app
