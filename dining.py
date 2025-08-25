@@ -1,4 +1,4 @@
-from datetime import date
+from datetime import date, timedelta
 import requests
 
 def get_all_dining(tod = date.today()):
@@ -34,8 +34,21 @@ def find_visiting_chefs(tod = date.today()) -> list[dict]:
                 })
     return locations
 
+def check_vc_last_x_days(x: int) -> list[dict]:
+    locations = []
+    for i in range(x):
+        locations += [find_visiting_chefs(date.today() - timedelta(days=i))]
+    return True if [len(loc) > 0 for loc in locations] else False
+    
+
 def find_visiting_chefs_fmt(tod = date.today()) -> str:
     locations = find_visiting_chefs(tod)
+    if not check_vc_last_x_days(3):
+        if not check_vc_last_x_days(4):
+            return ""
+        return "No visiting chefs found. The last visiting chef was 4 days ago, this bot will not post again until a new visiting chef is found."
+    if len(locations) == 0:
+        return "No visiting chefs found for today."
     base_str = "Here are the visiting chefs for today:\n"
     menu_per_location = {}
     for chef in locations:

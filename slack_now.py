@@ -7,4 +7,7 @@ from slack import post_message
 from dotenv import load_dotenv
 load_dotenv()
 
-post_message(find_visiting_chefs_fmt(date.today()))
+response = find_visiting_chefs_fmt(date.today())
+
+if response != "":
+    post_message(response)
