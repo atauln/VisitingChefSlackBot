@@ -35,11 +35,11 @@ def find_visiting_chefs(tod = date.today()) -> list[dict]:
     return locations
 
 def check_vc_last_x_days(x: int) -> list[dict]:
-    locations = []
     for i in range(x):
-        locations += [find_visiting_chefs(date.today() - timedelta(days=i))]
-    return True if [len(loc) > 0 for loc in locations] else False
-    
+        locations = find_visiting_chefs(date.today() - timedelta(days=i))
+        if len(locations) > 0:
+            return False
+    return True
 
 def find_visiting_chefs_fmt(tod = date.today()) -> str:
     locations = find_visiting_chefs(tod)
